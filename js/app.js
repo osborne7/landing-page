@@ -58,32 +58,31 @@ for (const h2 of h2s) {
 
     }
 
-/// scroll to top button functionality:
-const scrollToTopButton = document.getElementById('js-top');
+/// scroll to top button functionality
+const scrollToTopButton = document.getElementById('top');
 
-// detemine whether or not we shold display the scroll to top button based on window position
-const scrollFunc = () => {
-    // get the current scroll value
-    let y = window.scrollY;
-    // if the scroll value is greater than the window height, add class to the scroll-to-top button to display it
-    if (y > 0) {
-        scrollToTopButton.className = "top-link show";
+// detemine whether or not to display the scroll to top button based on window position
+const scrollFunction = () => {
+    // find the Y scroll value
+    let yVal = window.scrollY;
+    // if scroll value is greater than window height, add class to display button, otherwise remove it
+    if (yVal > 0) {
+        scrollToTopButton.className = "back-to-top show";
     } else {
-        scrollToTopButton.className = "top-link hide";
+        scrollToTopButton.className = "back-to-top hide";
     }
 };
 
-window.addEventListener("scroll", scrollFunc);
-    const scrollToTop = () => {
-    // set a variable for the number of pixels we are from the top of the document.
-    const pixelsFromTop = document.documentElement.scrollTop || document.body.scrollTop;
-    // if that number is greater than 0, scroll back to 0/the top of document
-    // animate the scroll
-    if (pixelsFromTop > 0) {
-        window.requestAnimationFrame(scrollToTop);
-        // scrollTo takes an x and a y coordinate
-        window.scrollTo(0, pixelsFromTop - pixelsFromTop / 10);
-    }
+document.addEventListener("scroll", scrollFunction);
+
+const scrollToTop = () => {
+// set a variable for the number of pixels we are from the top of the document.
+const pixelsFromTop = document.documentElement.scrollTop || document.body.scrollTop;
+// if that number is greater than 0, scroll back to 0/the top of document
+if (pixelsFromTop > 0) {
+    window.requestAnimationFrame(scrollToTop);
+    window.scrollTo(0, pixelsFromTop - pixelsFromTop / 10);
+}
 };
 
 // when the button is clicked, run scrollToTop function
@@ -122,7 +121,7 @@ const highlightLi = () => {
             }
         }
     }
-}
+};
 
 
 // listen for scroll to timeout
@@ -138,9 +137,9 @@ document.addEventListener('scroll', function() {
 });
 
 // hide header while scrolling:
-window.onscroll = function() {
+document.onscroll = function() {
     pageHeader.style.top = "-50px";
-}
+};
 
 
 // highlight sections when in viewport
@@ -157,7 +156,7 @@ const highlightActive = () => {
             }
         }
     }
-}
+};
         
 // navlinks scroll to appropriate section when clicked:
 let anchorLinks = document.querySelectorAll('a[href^="#"]');
@@ -165,14 +164,14 @@ let anchorLinks = document.querySelectorAll('a[href^="#"]');
 for (let anchorLink of anchorLinks) {
     anchorLink.addEventListener('click', (e) => {
         let anchorValue = anchorLink.getAttribute('href');
-        let target = document.querySelector(anchorValue);
-        target.scrollIntoView({
+        let anchorTo = document.querySelector(anchorValue);
+        anchorTo.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
         })
         e.preventDefault();
     })
-}
+};
 
 
 /**
